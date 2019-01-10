@@ -4,10 +4,10 @@
 Emulator of 'std::filesystem' 
 Emulates '<experimental/filesystem>' without the need for g++17.
 It is usable with g++11 without additional libraries
- * Prototype: Not all methods are implemented as they are made as they are needed.
+ * Early version: Not all methods are implemented since they are coded as they are needed.
  * Additional methods are available, such as get_full_path().
  * Compatible with Linux, Windows OS and Apple(Darwin).
- * Continuous integration: CircleCI, TravisCI
+ * Continuous integration: [Circle CI](https://circleci.com/), [Circle CI](https://circleci.com/).
  
  ├── CMakeLists.txt  
  ├── .travis.yml  
@@ -24,4 +24,4 @@ It is usable with g++11 without additional libraries
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── test_filesystem_LINUX.cpp  
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── test_filesystem_WIN32.cpp  
 
-* Catch2 will be downloaded as part of cmake when run on unittests
+* [Catch2](https://github.com/catchorg/Catch2) will be downloaded as part of cmake when run on unittests
