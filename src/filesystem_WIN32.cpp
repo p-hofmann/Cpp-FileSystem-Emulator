@@ -14,9 +14,9 @@ namespace filesystem
      */
     void path::_init_root()
     {
-        if (location.size() > 2)
+        if (size() > 2)
             /* X:\ hopefully indicated root path enough for a windows system */
-            if (location[1] == ':' && location[2] == _directoryDelimiter)
+            if (*this[1] == ':' && *this[2] == _directoryDelimiter)
             {
                 _root_name = substr(0, 2);
                 _root_directory = std::string(1, _directoryDelimiter);
@@ -131,8 +131,9 @@ namespace filesystem
      */
     bool path::is_executabe()
     {
-        auto fullPath = get_full_path();
-        return access(fullPath.c_str(), X_OK) == 0;
+        return exists(get_full_path());  // I am not happy with this!
+//        auto fullPath = get_full_path();
+//        return access(fullPath.c_str(), X_OK) == 0;
     }
 
     /**
