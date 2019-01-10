@@ -30,3 +30,13 @@
 *.exe
 *.out
 *.app
+
+# CLion project files
+.idea/
+cmake-build-debug/
+
+# External projects, ideally not included
+external
+
+# Ignore binaries
+bin
