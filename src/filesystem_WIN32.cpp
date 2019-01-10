@@ -16,7 +16,7 @@ namespace filesystem
     {
         if (size() > 2)
             /* X:\ hopefully indicated root path enough for a windows system */
-            if (*this[1] == ':' && *this[2] == _directoryDelimiter)
+            if (*(*this[1]) == ':' && *(*this[2]) == _directoryDelimiter)
             {
                 _root_name = substr(0, 2);
                 _root_directory = std::string(1, _directoryDelimiter);
