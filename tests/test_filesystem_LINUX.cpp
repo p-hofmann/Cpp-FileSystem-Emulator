@@ -10,6 +10,8 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <unistd.h>
+#include <pwd.h>
 #include "catch.hpp"
 #include "filesystem.h"
 
@@ -38,7 +40,7 @@ TEST_CASE("Test filename", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).filename();
-        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "''");
+        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
     }
 }
 
@@ -65,7 +67,7 @@ TEST_CASE("Test parent_path", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).parent_path();
-        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "''");
+        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
     }
 }
 
@@ -92,7 +94,7 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).is_absolute();
-        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "''");
+        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }
 
@@ -101,6 +103,9 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
  */
 TEST_CASE("Test get_full_path", "[Validator]")
 {
+    uid_t uid = geteuid();
+    struct passwd *pw = getpwuid(uid);
+    string userName = string(pw->pw_name);
     map<string, vector<string>> testCases;
     testCases["cmake"] = {"/", "cmake"};
     testCases["../CMakeLists.txt"] = {"/", "../CMakeLists.txt"};
@@ -108,14 +113,14 @@ TEST_CASE("Test get_full_path", "[Validator]")
     testCases["."] = {"/", "."};
     testCases["/"] = {"/", "/"};
     testCases["/asdasdasd"] = {"/asdasdasd", "/asdasdasd"};
-    testCases["~"] = {"/home/", ""};
-    testCases["~/"] = {"/home/", ""};
+    testCases["~"] = {"/", userName};  // circleci '~' -> '/root/project//root'
+    testCases["~/"] = {"/", userName};  // travisci '~' -> '/home/travis'
     filesystem::path output;
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).get_full_path();
-        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "''");
-        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "''");
+        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
+        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
     }
 }
 
@@ -139,7 +144,7 @@ TEST_CASE("Test is_executabe", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).is_executabe();
-        CHECK_MESSAGE((output == it->second), "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "''");
+        CHECK_MESSAGE((output == it->second), "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }
 
@@ -163,6 +168,6 @@ TEST_CASE("Test exists", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::exists(filesystem::path(it->first).get_full_path());
-        CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "''");
+        CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }
