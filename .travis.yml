@@ -285,8 +285,8 @@ script:
   - cmake --build .
   - if [[ "${TRAVIS_OS_NAME}" != "windows" ]]; then CTEST_OUTPUT_ON_FAILURE=1 ctest .; fi
   - popd
-  - if [[ "${TRAVIS_OS_NAME}" != "windows" ]]; then for file in ./bin/*; do "$file" -r junit; done fi
-  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then for file in ./bin/Debug/*.exe; do "$file" -r junit; done fi
+  - if [[ "${TRAVIS_OS_NAME}" != "windows" ]]; then for file in ./bin/*; do "$file"; done fi
+  - if [[ "${TRAVIS_OS_NAME}" == "windows" ]]; then for file in ./bin/Debug/*.exe; do "$file"; done fi
 #    # Coverage collection does not work for OS X atm
 #  - |
 #    if [[ "${TRAVIS_OS_NAME}" == "linux" ]] && [[ "${COVERAGE}" == "1" ]]; then
