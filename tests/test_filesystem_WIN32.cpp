@@ -18,27 +18,21 @@ using namespace std;
 /*!
  * Testing filename()
  */
-//    root name "C:"
-//    root directory "\"
-//    root path is: "C:\"
-//    path ::= [root] [relative-path]  // an empty path is valid
-//    root ::= [root-name] [root-directory]
-//    root-directory ::= separator
 
 TEST_CASE("Test filename", "[FileSystem]")
 {
     const map<string, string> testCases = {
-            {"/foo/bar.txt", "bar.txt"},
-            {"/foo/.bar",    ".bar"},
-            {"/foo/bar/",    "bar"},
-            {"/foo/.",       "."},
-            {"/foo/..",      ".."},
+            {"C:\\foo\\bar.txt", "bar.txt"},
+            {"C:\\foo\\.bar",    ".bar"},
+            {"C:\\foo\\bar\\",    "bar"},
+            {"C:\\foo\\.",       "."},
+            {"C:\\foo\\..",      ".."},
             {".",            "."},
             {"..",           ".."},
-            {"/",            ""},
-            {"/host",        "host"},
-            {"//host",       "host"},
-            {"///host",      "host"}
+            {"C:\\",            ""},
+            {"C:\\host",        "host"},
+            {"C:\\\\host",       "host"},
+            {"C:\\\\\\host",      "host"}
     };
 
     string output;
@@ -55,17 +49,17 @@ TEST_CASE("Test filename", "[FileSystem]")
 TEST_CASE("Test parent_path", "[FileSystem]")
 {
     const map<string, string> testCases = {
-            {"/foo/bar.txt", "/foo"},
-            {"/foo/.bar",    "/foo"},
-            {"/foo/bar/",    "/foo"},
-            {"/foo/.",       "/foo"},
-            {"/foo/..",      "/foo"},
+            {"C:\\foo\\bar.txt", "C:\\foo"},
+            {"C:\\foo\\.bar",    "C:\\foo"},
+            {"C:\\foo\\bar\\",    "C:\\foo"},
+            {"C:\\foo\\.",       "C:\\foo"},
+            {"C:\\foo\\..",      "C:\\foo"},
             {".",            ""},
             {"..",           ""},
-            {"/",            "/"},
-            {"/host",        "/"},
-            {"//host",       "/"},
-            {"///host",      "/"}
+            {"C:\\",            "C:\\"},
+            {"C:\\host",        "C:\\"},
+            {"C:\\\\host",       "C:\\"},
+            {"C:\\\\\\host",      "C:\\"}
     };
 
     string output;
@@ -82,17 +76,17 @@ TEST_CASE("Test parent_path", "[FileSystem]")
 TEST_CASE("Test is_absolute", "[FileSystem]")
 {
     const map<string, bool> testCases = {
-            {"/foo/bar.txt", true},
-            {"/foo/.bar",    true},
-            {"/foo/bar/",    true},
-            {"/foo/.",       true},
-            {"/foo/..",      true},
+            {"C:\\foo\\bar.txt", true},
+            {"C:\\foo\\.bar",    true},
+            {"C:\\foo\\bar\\",    true},
+            {"C:\\foo\\.",       true},
+            {"C:\\foo\\..",      true},
             {".",            false},
             {"..",           false},
-            {"/",            true},
-            {"/host",        true},
-            {"//host",       true},
-            {"///host",      true}
+            {"C:\\",            true},
+            {"C:\\host",        true},
+            {"C:\\/host",       true},
+            {"C:\\//host",      true}
     };
 
     bool output;
@@ -109,14 +103,14 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
 TEST_CASE("Test get_full_path", "[Validator]")
 {
     map<string, vector<string>> testCases;
-    testCases["cmake"] = {"/", "cmake"};
-    testCases["../CMakeLists.txt"] = {"/", "../CMakeLists.txt"};
-    testCases["asdasdasdasdasdadasdas"] = {"/", "asdasdasdasdasdadasdas"};
-    testCases["."] = {"/", "."};
-    testCases["/"] = {"/", "/"};
-    testCases["/asdasdasd"] = {"/asdasdasd", "/asdasdasd"};
-    testCases["~"] = {"/home/", ""};
-    testCases["~/"] = {"/home/", ""};
+    testCases["cmake"] = {"C:\\", "cmake"};
+    testCases["../CMakeLists.txt"] = {"C:\\", "../CMakeLists.txt"};
+    testCases["asdasdasdasdasdadasdas"] = {"C:\\", "asdasdasdasdasdadasdas"};
+    testCases["."] = {"C:\\", "."};
+    testCases["C:\\"] = {"C:\\", "C:\\"};
+    testCases["C:\\asdasdasd"] = {"C:\\asdasdasd", "C:\\asdasdasd"};
+    testCases["%HomeDrive%%HomePath%"] = {"C:\\", ""};
+    testCases["%HomeDrive%%HomePath%\\"] = {"C:\\", ""};
     filesystem::path output;
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
@@ -133,13 +127,13 @@ TEST_CASE("Test is_executabe", "[FileSystem]")
 {
     const map<string, bool> testCases = {
             {"cmake", true},
-            {"/foo/.bar",    false},
-            {"/foo/bar/",    false},
-            {"/foo/.",       false},
-            {"/foo/..",      false},
+            {"C:\\foo\\.bar",    false},
+            {"C:\\foo\\bar\\",    false},
+            {"C:\\foo\\.",       false},
+            {"C:\\foo\\..",      false},
             {".",            true},
             {"..",           true},
-            {"/",            true}
+            {"C:\\",            true}
     };
 
     bool output;
@@ -157,13 +151,13 @@ TEST_CASE("Test exists", "[FileSystem]")
 {
     const map<string, bool> testCases = {
             {"cmake", true},
-            {"/foo/.bar",    false},
-            {"/foo/bar/",    false},
-            {"/foo/.",       false},
-            {"/foo/..",      false},
+            {"C:\\foo\\.bar",    false},
+            {"C:\\foo\\bar\\",    false},
+            {"C:\\foo\\.",       false},
+            {"C:\\foo\\..",      false},
             {".",            true},
             {"..",           true},
-            {"/",            true}
+            {"C:\\",            true}
     };
 
     bool output;
