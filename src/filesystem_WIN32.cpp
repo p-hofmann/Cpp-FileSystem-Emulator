@@ -16,11 +16,12 @@ namespace filesystem
     {
         if (size() > 2)
             /* X:\ hopefully indicated root path enough for a windows system */
-            if (*(*this[1]) == ':' && *(*this[2]) == _directoryDelimiter)
-            {
-                _root_name = substr(0, 2);
-                _root_directory = std::string(1, _directoryDelimiter);
-            }
+            if (*this[1] == ':')
+                if (*this[2] == _directoryDelimiter)
+                {
+                    _root_name = substr(0, 2);
+                    _root_directory = std::string(1, _directoryDelimiter);
+                }
     }
 
     /**
@@ -169,7 +170,7 @@ namespace filesystem
         //const std::string PATH = convert_to_utf8( _wgetenv(L"PATH") ); // Handle Unicode, just remove if you don't want/need this. convert_to_utf8 uses WideCharToMultiByte in the Win32 API
         char *tmp;
         std::string systemPath;
-        tmp = std::getenv(std::string("PATH").c_str());
+        tmp = get_environment_variable("PATH");
         if (tmp == NULL)
             systemPath = std::string("");
         else
@@ -185,7 +186,7 @@ namespace filesystem
     path current_path()
     {
         char buff[FILENAME_MAX];
-        getcwd(buff, FILENAME_MAX);
+        _getcwd(buff, FILENAME_MAX);
         return path(std::string(buff));
     }
 
@@ -196,9 +197,19 @@ namespace filesystem
      */
     path get_environment_variable(std::string const &input)
     {
-        const char *variable = getenv(input.c_str());
-        if (variable == NULL)
-            return path("");
-        return path(variable);
+//        const char *variable = getenv(input.c_str());
+//        if (variable == NULL)
+//            return path("");
+//        return path(variable);
+        path result;
+        char* buf = nullptr;
+        size_t sz = 0;
+        if (_dupenv_s(&buf, &sz, input.c_str()) == 0 && buf != nullptr)
+        {
+            result = path(buf);
+            free(buf);
+            return result;
+        }
+        return path("");
     }
 }
