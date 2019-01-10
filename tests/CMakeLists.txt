@@ -44,7 +44,7 @@ endif ()
 set(SRC_LOCATION ${CMAKE_CURRENT_SOURCE_DIR}/../src)
 if (UNIX)
     if (APPLE AND ${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
-        set(PLATFORM_DEPENENT_FILES ${SRC_LOCATION}/filesystem_LINUX.cpp test_filesystem_LINUX.cpp)
+        set(PLATFORM_DEPENENT_FILES ${SRC_LOCATION}/filesystem_LINUX.cpp test_filesystem_DARWIN.cpp)
     else ()
         set(PLATFORM_DEPENENT_FILES ${SRC_LOCATION}/filesystem_LINUX.cpp test_filesystem_LINUX.cpp)
     endif ()
@@ -79,5 +79,5 @@ add_dependencies(${TEST_PROJECT_NAME} catch2_project)
 # Adding test for 'ctest'
 add_test(
     NAME ${TEST_PROJECT_NAME}
-    COMMAND ${TEST_PROJECT_NAME} -r xml)
+    COMMAND ${TEST_PROJECT_NAME})
 
