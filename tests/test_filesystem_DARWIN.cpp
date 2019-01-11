@@ -116,6 +116,7 @@ TEST_CASE("Test get_full_path", "[Validator]")
         output = filesystem::path(it->first).get_full_path();
         REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
         CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
+        CHECK_MESSAGE(output.endsWith(it->second[1]), "get_full_path '" << it->first << "' -> '" << output << "'");
     }
 }
 
