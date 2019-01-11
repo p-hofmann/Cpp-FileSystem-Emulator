@@ -13,17 +13,14 @@ namespace filesystem
      * Constructor with no pathing argument
      */
     path::path()
-            : std::string(), _directoryDelimiter('/'), _root_name(""), _root_directory("") {}
+            : std::string(), _directoryDelimiter('/') {}
 
     /**
      * Constructor with file or folder location parameter
      * @param location - file or folder location
      */
-    path::path(const path &location)
-            : std::string(location), _directoryDelimiter('/'), _root_name(""), _root_directory("")
+    path::path(const path &location) : std::string(location), _directoryDelimiter('/')
     {
-        if (location.front() == _directoryDelimiter)
-            _root_directory = std::string(1, _directoryDelimiter);
         _rstrip();
     }
 
@@ -31,12 +28,21 @@ namespace filesystem
      * Constructor with file or folder location parameter
      * @param location - file or folder location
      */
-    path::path(const std::string &location)
-            : std::string(location), _directoryDelimiter('/'), _root_name(""), _root_directory("")
+    path::path(const std::string &location) : std::string(location), _directoryDelimiter('/')
     {
-        if (location.front() == _directoryDelimiter)
-            _root_directory = std::string(1, _directoryDelimiter);
         _rstrip();
+    }
+
+    std::string path::root_name()
+    {
+        return "";
+    }
+
+    std::string path::root_directory()
+    {
+        if (front() == _directoryDelimiter)
+            return std::string(1, _directoryDelimiter);
+        return "";
     }
 
     /**

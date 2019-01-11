@@ -10,34 +10,16 @@
 namespace filesystem
 {
     /**
-     * Windows specific value initiation
-     */
-    void path::_init_root()
-    {
-        if (size() > 2)
-            /* X:\ hopefully indicated root path enough for a windows system */
-            if (this->at(1) == ':')
-                if (this->at(1) == _directoryDelimiter)
-                {
-                    _root_name = substr(0, 2);
-                    _root_directory = std::string(1, _directoryDelimiter);
-                }
-    }
-
-    /**
      * Constructor with no pathing argument
      */
-    path::path()
-            : std::string(), _directoryDelimiter('\\'), _root_name(""), _root_directory("") { _rstrip(); }
+    path::path() : std::string(), _directoryDelimiter('\\') { _rstrip(); }
 
     /**
      * Constructor with file or folder location parameter
      * @param location - file or folder location
      */
-    path::path(const path &location)
-            : std::string(location), _directoryDelimiter('\\'), _root_name(""), _root_directory("")
+    path::path(const path &location) : std::string(location), _directoryDelimiter('\\')
     {
-        _init_root();
         _rstrip();
     }
 
@@ -45,13 +27,24 @@ namespace filesystem
      * Constructor with file or folder location parameter
      * @param location - file or folder location
      */
-    path::path(const std::string &location)
-            : std::string(location), _directoryDelimiter('\\'), _root_name(""), _root_directory("")
+    path::path(const std::string &location) : std::string(location), _directoryDelimiter('\\')
     {
-        if (location.front() == _directoryDelimiter)
-            _root_directory = std::string(1, _directoryDelimiter);
-        _init_root();
         _rstrip();
+    }
+
+    std::string path::root_name()
+    {
+        /* X: hopefully indicates root name enough for a windows system */
+        if (size() > 1 && this->at(1) == ':')
+            return substr(0, 2);
+        return "";
+    }
+
+    std::string path::root_directory()
+    {
+        if (has_root_name() && this->at(2) == _directoryDelimiter)
+            return std::string(1, _directoryDelimiter);
+        return "";
     }
 
     /**

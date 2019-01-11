@@ -23,20 +23,16 @@ namespace filesystem
     {
     private:
         const char _directoryDelimiter;
-        std::string _root_name;
-        std::string _root_directory;
 
         /**
          * Remove all delimiter at the end of the string
          */
         void _rstrip()
         {
-            size_type rootPathSize = _root_name.size() + _root_directory.size();
+            size_type rootPathSize = root_name().size() + root_directory().size();
             while (this->size() > rootPathSize && this->back() == _directoryDelimiter)
                 this->pop_back();
         }
-
-        void _init_root();
 
     public:
         path();
@@ -81,7 +77,7 @@ namespace filesystem
          * Windows: 'C:'
          * @return - Root of path
          */
-        std::string root_name() { return _root_name; }
+        std::string root_name();
 
         /**
          * Get method for _root_directory
@@ -89,7 +85,7 @@ namespace filesystem
          * Windows: '\'
          * @return - Root directory
          */
-        std::string root_directory() { return _root_directory; }
+        std::string root_directory();
 
         /**
          * Get method for root path
