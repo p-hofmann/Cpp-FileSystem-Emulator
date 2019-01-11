@@ -3,8 +3,8 @@
  */
 
 #define CATCH_CONFIG_MAIN  // Tells Catch to provide a main()
-//#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
-//#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
+#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
+#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
 
 #include <map>
 #include <vector>
@@ -39,8 +39,8 @@ TEST_CASE("Test filename", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).filename();
-        CHECK(output == it->second);
-//        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        CHECK(output == it->second);
+        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
 //        std::cout << "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
@@ -68,8 +68,8 @@ TEST_CASE("Test parent_path", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).parent_path();
-        CHECK(output == it->second);
-//        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        CHECK(output == it->second);
+        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
 //        std::cout << "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
@@ -84,21 +84,21 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
             {"C:\\foo\\.bar",    true},
             {"C:\\foo\\bar\\",    true},
             {"C:\\foo\\.",       true},
-//            {"C:\\foo\\..",      true},
-//            {".",            false},
-//            {"..",           false},
-//            {"C:\\",            true},
-//            {"C:\\host",        true},
-//            {"C:\\/host",       true},
-//            {"C:\\//host",      true}
+            {"C:\\foo\\..",      true},
+            {".",            false},
+            {"..",           false},
+            {"C:\\",            true},
+            {"C:\\host",        true},
+            {"C:\\/host",       true},
+            {"C:\\//host",      true}
     };
 
     bool output;
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).is_absolute();
-        CHECK(output == it->second);
-//        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
+//        CHECK(output == it->second);
+        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
 //        std::cout << "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
     }
 }
