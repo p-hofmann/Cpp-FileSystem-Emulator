@@ -176,11 +176,11 @@ namespace filesystem
      * Resolve the environment variable and return it as String
      * @return - Home directory path
      */
-    path get_environment_variable(std::string const &input)
+    std::string get_environment_variable(std::string const &input)
     {
         const char *variable = getenv(input.c_str());
         if (variable == NULL)
             return path("");
-        return path(variable);
+        return std::string(variable);
     }
 }

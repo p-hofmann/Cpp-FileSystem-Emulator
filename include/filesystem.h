@@ -260,7 +260,7 @@ namespace filesystem
 
     path current_path();
 
-    path get_environment_variable(std::string const &input);
+    std::string get_environment_variable(std::string const &input);
 
 //    temp_directory_path
 }
