@@ -3,8 +3,8 @@
  */
 
 #define CATCH_CONFIG_MAIN  // Tells Catch to provide a main()
-#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
-#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
+//#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
+//#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
 
 #include <map>
 #include <vector>
@@ -39,8 +39,9 @@ TEST_CASE("Test filename", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).filename();
-        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
-        std::cout << "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
+        CHECK(output == it->second);
+//        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        std::cout << "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
 
@@ -67,8 +68,9 @@ TEST_CASE("Test parent_path", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).parent_path();
-        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
-        std::cout << "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
+        CHECK(output == it->second);
+//        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        std::cout << "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
 
@@ -95,8 +97,9 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).is_absolute();
-        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
-        std::cout << "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
+        CHECK(output == it->second);
+//        CHECK_MESSAGE((output == it->second), "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
+//        std::cout << "is_absolute '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
     }
 }
 
@@ -118,9 +121,11 @@ TEST_CASE("Test get_full_path", "[Validator]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).get_full_path();
-        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
-        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
-        std::cout << output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'";
+        REQUIRE(!output.empty());
+        CHECK(output.startsWith(it->second[0]));
+//        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
+//        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
+//        std::cout << output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'";
     }
 }
 
@@ -144,8 +149,9 @@ TEST_CASE("Test is_executabe", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).is_executabe();
-        CHECK_MESSAGE((output == it->second), "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
-        std::cout << "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
+        CHECK(output == it->second);
+//        CHECK_MESSAGE((output == it->second), "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
+//        std::cout << "is_executabe '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
     }
 }
 
@@ -169,7 +175,8 @@ TEST_CASE("Test exists", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::exists(filesystem::path(it->first).get_full_path());
-        CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
-        std::cout << "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
+        CHECK(output == it->second);
+//        CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
+//        std::cout << "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'";
     }
 }
