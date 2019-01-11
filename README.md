@@ -1,6 +1,6 @@
 # Cpp-FileSystem-Emulator
-[![TraviCI](https://api.travis-ci.com/p-hofmann/Cpp-FileSystem-Emulator.svg?branch=master)](https://travis-ci.com/p-hofmann/CPP-Template-Sub1-Sub)
-[![CircleCI](https://circleci.com/gh/p-hofmann/Cpp-FileSystem-Emulator/tree/master.svg?style=svg)](https://circleci.com/gh/p-hofmann/CPP-Template-Sub1-Sub/tree/master)  
+[![TraviCI](https://api.travis-ci.com/p-hofmann/Cpp-FileSystem-Emulator.svg?branch=master)](https://travis-ci.com/p-hofmann/Cpp-FileSystem-Emulator)
+[![CircleCI](https://circleci.com/gh/p-hofmann/Cpp-FileSystem-Emulator/tree/master.svg?style=svg)](https://circleci.com/gh/p-hofmann/Cpp-FileSystem-Emulator/tree/master)  
 Emulator of 'std::filesystem' 
 Emulates '<experimental/filesystem>' without the need for g++17.
 It is usable with g++11 without additional libraries
