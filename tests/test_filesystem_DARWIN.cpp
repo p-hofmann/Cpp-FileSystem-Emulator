@@ -167,3 +167,21 @@ TEST_CASE("Test exists", "[FileSystem]")
         CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }
+
+/*!
+ * Testing get_environment_variable()
+ */
+TEST_CASE("Test get_environment_variable", "[FileSystem]")
+{
+    auto output = filesystem::get_environment_variable("PATH");
+    REQUIRE_MESSAGE(!output.empty(), "PATH: '" << output << "'");
+}
+
+/*!
+ * Testing _getSystemPaths()
+ */
+TEST_CASE("Test _getSystemPaths", "[FileSystem]")
+{
+    auto output = filesystem::_getSystemPaths();
+    REQUIRE_MESSAGE(output.size() > 1, "PATHs: '" << output.size() << "'");
+}
