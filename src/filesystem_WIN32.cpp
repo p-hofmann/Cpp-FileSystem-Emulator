@@ -160,15 +160,8 @@ namespace filesystem
      */
     std::vector<std::string> _getSystemPaths()
     {
-        //const std::string PATH = convert_to_utf8( _wgetenv(L"PATH") ); // Handle Unicode, just remove if you don't want/need this. convert_to_utf8 uses WideCharToMultiByte in the Win32 API
-//        char *tmp;
         std::string systemPath;
         systemPath = get_environment_variable("PATH");
-//        if (tmp == NULL)
-//            systemPath = std::string("");
-//        else
-//            systemPath = std::string(tmp);
-
         return _explode(systemPath, pathDelimiter);
     }
 
