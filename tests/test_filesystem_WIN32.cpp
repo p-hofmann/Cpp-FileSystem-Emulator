@@ -3,8 +3,8 @@
  */
 
 #define CATCH_CONFIG_MAIN  // Tells Catch to provide a main()
-#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
-#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
+//#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
+//#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
 
 #include <map>
 #include <vector>
@@ -39,8 +39,8 @@ TEST_CASE("Test filename", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).filename();
-//        REQUIRE(output == it->second);
-        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+        CHECK(output == it->second);
+//        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
 //        std::cout << "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
