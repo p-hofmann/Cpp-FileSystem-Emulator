@@ -39,8 +39,8 @@ TEST_CASE("Test filename", "[FileSystem]")
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
         output = filesystem::path(it->first).filename();
-        REQUIRE(output == it->second);
-//        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        REQUIRE(output == it->second);
+        CHECK_MESSAGE(output == it->second, "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
 //        std::cout << "basename '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
     }
 }
