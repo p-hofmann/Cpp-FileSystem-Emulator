@@ -155,14 +155,8 @@ namespace filesystem
      */
     std::vector<std::string> _getSystemPaths()
     {
-        char *tmp;
         std::string systemPath;
-        tmp = std::getenv(std::string("PATH").c_str());
-        if (tmp == NULL)
-            systemPath = std::string("");
-        else
-            systemPath = std::string(tmp);
-
+        systemPath = get_environment_variable("PATH");
         return _explode(systemPath, pathDelimiter);
     }
 
