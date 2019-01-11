@@ -110,7 +110,7 @@ namespace filesystem
                 systemPath = filesystem::path(*systemPathIt);
                 if (filesystem::is_regular_file(systemPath / fileName))
                     return systemPath / fileName;
-                else if (filesystem::is_regular_file(systemPath / fileName + ".exe"))
+                else if (!fileName.has_extension() && filesystem::is_regular_file(systemPath / fileName + ".exe"))
                     return systemPath / fileName + ".exe";
 
             }

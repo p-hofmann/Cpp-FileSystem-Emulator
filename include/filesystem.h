@@ -175,6 +175,37 @@ namespace filesystem
             return result;
         }
 
+        /**
+         * Get the filename without file extension
+         * @return - Reduced filename
+         */
+        path stem()
+        {
+            path fileName = fileName()
+            size_type delimiterPosition = fileName.rfind(".");
+            if (delimiterPosition == std::string::npos)
+                return fileName;
+            return fileName.substr(0, delimiterPosition);
+        };
+
+        /**
+         * Get the file extension of a filename
+         * @return - Filename extension
+         */
+        path extension()
+        {
+            path fileName = fileName()
+            size_type delimiterPosition = fileName.rfind(".");
+            if (delimiterPosition == std::string::npos)
+                return path("");
+            return fileName.substr(delimiterPosition + 1);
+        };
+
+        bool has_extension()
+        {
+            return !extension().empty()
+        }
+
         path get_full_path();
 
         /**
