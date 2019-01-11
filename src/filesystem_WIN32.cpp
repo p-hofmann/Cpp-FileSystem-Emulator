@@ -69,7 +69,7 @@ namespace filesystem
      * @param path - Directory path or file path
      * @return - full path to location
      */
-    path path::get_full_path()
+    path path::force_absolute_path()
     {
         filesystem::path systemPath, possiblePath;
         std::vector<std::string> systemPathVector;

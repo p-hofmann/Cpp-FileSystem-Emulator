@@ -208,7 +208,7 @@ namespace filesystem
          */
         bool has_extension() { return !extension().empty(); }
 
-        path get_full_path();
+        path force_absolute_path();
 
         /**
          * Return copy of path as string obj.

@@ -97,9 +97,9 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
 }
 
 /*!
- * Testing get_full_path()
+ * Testing force_absolute_path()
  */
-TEST_CASE("Test get_full_path", "[Validator]")
+TEST_CASE("Test force_absolute_path", "[Validator]")
 {
     map<string, vector<string>> testCases;
     testCases["cmake"] = {"/", "cmake"};
@@ -113,10 +113,10 @@ TEST_CASE("Test get_full_path", "[Validator]")
     filesystem::path output;
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
-        output = filesystem::path(it->first).get_full_path();
-        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
-        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
-        CHECK_MESSAGE(output.endsWith(it->second[1]), "get_full_path '" << it->first << "' -> '" << output << "'");
+        output = filesystem::path(it->first).force_absolute_path();
+        REQUIRE_MESSAGE(!output.empty(), "force_absolute_path '" << it->first << "' -> '" << output << "'");
+        CHECK_MESSAGE(output.startsWith(it->second[0]), "force_absolute_path '" << it->first << "' -> '" << output << "'");
+        CHECK_MESSAGE(output.endsWith(it->second[1]), "force_absolute_path '" << it->first << "' -> '" << output << "'");
     }
 }
 
@@ -163,7 +163,7 @@ TEST_CASE("Test exists", "[FileSystem]")
     bool output;
     for (auto it = testCases.begin(); it != testCases.end(); it++)
     {
-        output = filesystem::exists(filesystem::path(it->first).get_full_path());
+        output = filesystem::exists(filesystem::path(it->first).force_absolute_path());
         CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }

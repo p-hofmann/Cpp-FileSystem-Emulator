@@ -67,7 +67,7 @@ namespace filesystem
      * @param path - Directory path or file path
      * @return - full path to location
      */
-    path path::get_full_path()
+    path path::force_absolute_path()
     {
         filesystem::path systemPath, possiblePath;
         std::vector<std::string> systemPathVector;
@@ -121,7 +121,7 @@ namespace filesystem
      */
     bool path::is_executabe()
     {
-        auto fullPath = get_full_path();
+        auto fullPath = force_absolute_path();
         return access(fullPath.c_str(), X_OK) == 0;
     }
 
