@@ -31,7 +31,7 @@ namespace filesystem
          */
         void _rstrip()
         {
-            size_type rootPathSize = root_path().size();
+            size_type rootPathSize = _root_name.size() + _root_directory.size();
             while (this->size() > rootPathSize && this->back() == _directoryDelimiter)
                 this->pop_back();
         }
