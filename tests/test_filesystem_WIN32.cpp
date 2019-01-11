@@ -103,32 +103,32 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
     }
 }
 
-/*!
- * Testing get_full_path()
- */
-TEST_CASE("Test get_full_path", "[Validator]")
-{
-    map<string, vector<string>> testCases;
-    testCases["cmake"] = {"C:\\", "cmake"};
-    testCases["../CMakeLists.txt"] = {"C:\\", "..\\CMakeLists.txt"};
-    testCases["asdasdasdasdasdadasdas"] = {"C:\\", "asdasdasdasdasdadasdas"};
-    testCases["."] = {"C:\\", "."};
-    testCases["C:\\"] = {"C:\\", "C:\\"};
-    testCases["C:\\asdasdasd"] = {"C:\\asdasdasd", "C:\\asdasdasd"};
-    testCases["%HomeDrive%%HomePath%"] = {"C:\\", ""};
-    testCases["%HomeDrive%%HomePath%\\"] = {"C:\\", ""};
-    filesystem::path output;
-    for (auto it = testCases.begin(); it != testCases.end(); it++)
-    {
-        output = filesystem::path(it->first).get_full_path();
-        REQUIRE(!output.empty());
-        CHECK(output.startsWith(it->second[0]));
-        CHECK(output.endsWith(it->second[1]));
-//        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
-//        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
-//        std::cout << output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'";
-    }
-}
+///*!
+// * Testing get_full_path()
+// */
+//TEST_CASE("Test get_full_path", "[Validator]")
+//{
+//    map<string, vector<string>> testCases;
+//    testCases["cmake"] = {"C:\\", "cmake"};
+//    testCases["../CMakeLists.txt"] = {"C:\\", "..\\CMakeLists.txt"};
+//    testCases["asdasdasdasdasdadasdas"] = {"C:\\", "asdasdasdasdasdadasdas"};
+//    testCases["."] = {"C:\\", "."};
+//    testCases["C:\\"] = {"C:\\", "C:\\"};
+//    testCases["C:\\asdasdasd"] = {"C:\\asdasdasd", "C:\\asdasdasd"};
+//    testCases["%HomeDrive%%HomePath%"] = {"C:\\", ""};
+//    testCases["%HomeDrive%%HomePath%\\"] = {"C:\\", ""};
+//    filesystem::path output;
+//    for (auto it = testCases.begin(); it != testCases.end(); it++)
+//    {
+//        output = filesystem::path(it->first).get_full_path();
+//        REQUIRE(!output.empty());
+//        CHECK(output.startsWith(it->second[0]));
+//        CHECK(output.endsWith(it->second[1]));
+////        REQUIRE_MESSAGE(!output.empty(), "get_full_path '" << it->first << "' -> '" << output << "'");
+////        CHECK_MESSAGE(output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'");
+////        std::cout << output.startsWith(it->second[0]), "get_full_path '" << it->first << "' -> '" << output << "'";
+//    }
+//}
 
 /*!
  * Testing is_executabe()
