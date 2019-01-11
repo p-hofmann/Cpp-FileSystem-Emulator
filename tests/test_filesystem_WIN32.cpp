@@ -108,7 +108,7 @@ TEST_CASE("Test is_absolute", "[FileSystem]")
 TEST_CASE("Test get_full_path", "[Validator]")
 {
     map<string, vector<string>> testCases;
-    testCases["cmake"] = {"C:\\", "cmake"};
+    testCases["cmake"] = {"C:\\", "cmake.exe"};
     testCases["..\\CMakeLists.txt"] = {"C:\\", "..\\CMakeLists.txt"};
     testCases["asdasdasdasdasdadasdas"] = {"C:\\", "asdasdasdasdasdadasdas"};
     testCases["."] = {"C:\\", "."};
