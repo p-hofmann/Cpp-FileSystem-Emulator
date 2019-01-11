@@ -42,6 +42,7 @@ namespace filesystem
         path(const std::string &location);
 
         bool is_absolute();
+        bool is_relative() { return !is_absolute(); }
 
         bool is_executabe();
 
@@ -181,7 +182,7 @@ namespace filesystem
          */
         path stem()
         {
-            path fileName = fileName()
+            path fileName = filename();
             size_type delimiterPosition = fileName.rfind(".");
             if (delimiterPosition == std::string::npos)
                 return fileName;
@@ -194,17 +195,18 @@ namespace filesystem
          */
         path extension()
         {
-            path fileName = fileName()
+            path fileName = filename();
             size_type delimiterPosition = fileName.rfind(".");
             if (delimiterPosition == std::string::npos)
                 return path("");
             return fileName.substr(delimiterPosition + 1);
         };
 
-        bool has_extension()
-        {
-            return !extension().empty()
-        }
+        /**
+         * Check if path has a file extension
+         * @return - True if file extension exists
+         */
+        bool has_extension() { return !extension().empty(); }
 
         path get_full_path();
 
