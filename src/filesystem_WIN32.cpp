@@ -125,8 +125,8 @@ namespace filesystem
      */
     bool path::is_executabe()
     {
-        return exists(get_full_path());  // I am not happy with this!
-//        auto fullPath = get_full_path();
+        return exists(force_absolute_path());  // I am not happy with this!
+//        auto fullPath = force_absolute_path();
 //        return access(fullPath.c_str(), X_OK) == 0;
     }
 
