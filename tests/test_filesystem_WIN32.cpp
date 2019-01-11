@@ -136,11 +136,11 @@ TEST_CASE("Test is_executabe", "[FileSystem]")
             {"C:\\foo\\.bar",        false},
             {"C:\\foo\\bar\\",       false},
             {"C:\\foo\\.",           false},
-            {"C:\\foo\\..",          false},
-            {"C:\\foo\\bar\\..\\..", false},
+            {"C:\\foo\\..",          true}, // funny, this is a legal path on wondows OS
+            {"C:\\foo\\bar\\..\\..", true}, // funny, this is a legal path on wondows OS
             {".",                    true},
             {"..",                   true},
-//            {"C:\\",            true}
+            {"C:\\",                 true}
     };
 
     bool output;
@@ -159,14 +159,15 @@ TEST_CASE("Test is_executabe", "[FileSystem]")
 TEST_CASE("Test exists", "[FileSystem]")
 {
     const map<string, bool> testCases = {
-            {"cmake",          true},
-            {"C:\\foo\\.bar",  false},
-            {"C:\\foo\\bar\\", false},
-            {"C:\\foo\\.",     false},
-            {"C:\\foo\\..",    false},
-            {".",              true},
-            {"..",             true},
-            {"C:\\",           true}
+            {"cmake",                true},
+            {"C:\\foo\\.bar",        false},
+            {"C:\\foo\\bar\\",       false},
+            {"C:\\foo\\.",           false},
+            {"C:\\foo\\..",          true}, // funny, this is a legal path on wondows OS
+            {"C:\\foo\\bar\\..\\..", true}, // funny, this is a legal path on wondows OS
+            {".",                    true},
+            {"..",                   true},
+            {"C:\\",                 true}
     };
 
     bool output;
@@ -187,4 +188,5 @@ TEST_CASE("Test get_environment_variable", "[FileSystem]")
     auto output = filesystem::get_environment_variable("PATH");
     INFO("PATH: '" << output << "'");
     REQUIRE_MESSAGE(!output.empty(), "PATH: '" << output << "'");
+    REQUIRE_MESSAGE(output.empty(), "PATH: '" << output << "'");
 }
