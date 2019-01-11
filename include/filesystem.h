@@ -167,7 +167,7 @@ namespace filesystem
             path result = this->substr(0, delimiterPosition);
 
             /// Is at root
-            if (result.empty())
+            if (result == this->root_name())
                 return root_path();
             result._rstrip();
 
