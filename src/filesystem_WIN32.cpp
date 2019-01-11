@@ -107,12 +107,12 @@ namespace filesystem
             systemPathVector = _getSystemPaths();
             for (auto systemPathIt = systemPathVector.begin(); systemPathIt < systemPathVector.end(); systemPathIt++)
             {
-                // strip('"') ???
                 systemPath = filesystem::path(*systemPathIt);
                 if (filesystem::is_regular_file(systemPath / fileName))
-                {
                     return systemPath / fileName;
-                }
+                else if (filesystem::is_regular_file(systemPath / fileName + ".exe"))
+                    return systemPath / fileName + ".exe";
+
             }
         }
         /// CWD + relative path, does not exist, no file or folder at path
