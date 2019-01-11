@@ -132,13 +132,14 @@ TEST_CASE("Test get_full_path", "[Validator]")
 TEST_CASE("Test is_executabe", "[FileSystem]")
 {
     const map<string, bool> testCases = {
-            {"cmake",          true},
-            {"C:\\foo\\.bar",  false},
-            {"C:\\foo\\bar\\", false},
-            {"C:\\foo\\.",     false},
-            {"C:\\foo\\..",    false},
-            {".",              true},
-            {"..",             true},
+            {"cmake",                true},
+            {"C:\\foo\\.bar",        false},
+            {"C:\\foo\\bar\\",       false},
+            {"C:\\foo\\.",           false},
+            {"C:\\foo\\..",          false},
+            {"C:\\foo\\bar\\..\\..", false},
+            {".",                    true},
+            {"..",                   true},
 //            {"C:\\",            true}
     };
 
@@ -176,4 +177,14 @@ TEST_CASE("Test exists", "[FileSystem]")
                       "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output)
                                  << "'");
     }
+}
+
+/*!
+ * get_environment_variable exists()
+ */
+TEST_CASE("Test get_environment_variable", "[FileSystem]")
+{
+    auto output = filesystem::get_environment_variable("PATH");
+    INFO("PATH: '" << output << "'");
+    REQUIRE_MESSAGE(!output.empty(), "PATH: '" << output << "'");
 }

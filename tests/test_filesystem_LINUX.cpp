@@ -172,3 +172,12 @@ TEST_CASE("Test exists", "[FileSystem]")
         CHECK_MESSAGE((output == it->second), "exists '" << it->first << "' -> '" << to_string(it->second) << "' : '" << to_string(output) << "'");
     }
 }
+
+/*!
+ * get_environment_variable exists()
+ */
+TEST_CASE("Test get_environment_variable", "[FileSystem]")
+{
+    auto output = filesystem::get_environment_variable("PATH");
+    REQUIRE_MESSAGE(!output.empty(), "PATH: '" << output << "'");
+}
