@@ -3,8 +3,8 @@
  */
 
 #define CATCH_CONFIG_MAIN  // Tells Catch to provide a main()
-//#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
-//#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
+#define CHECK_MESSAGE(cond, msg) do { std::cout << msg); CHECK(cond); } while((void)0, 0)
+#define REQUIRE_MESSAGE(cond, msg) do { std::cout << msg); REQUIRE(cond); } while((void)0, 0)
 
 #include <map>
 #include <vector>
