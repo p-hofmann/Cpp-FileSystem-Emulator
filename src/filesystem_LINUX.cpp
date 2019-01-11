@@ -13,7 +13,7 @@ namespace filesystem
      * Constructor with no pathing argument
      */
     path::path()
-            : std::string(), _directoryDelimiter('/'), _root_name(""), _root_directory("") { _rstrip(); }
+            : std::string(), _directoryDelimiter('/'), _root_name(""), _root_directory("") {}
 
     /**
      * Constructor with file or folder location parameter
