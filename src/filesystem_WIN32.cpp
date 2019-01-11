@@ -42,7 +42,7 @@ namespace filesystem
 
     std::string path::root_directory()
     {
-        if (has_root_name() && this->at(2) == _directoryDelimiter)
+        if (size() > 2 && this->at(2) == _directoryDelimiter && has_root_name())
             return std::string(1, _directoryDelimiter);
         return "";
     }
