@@ -29,10 +29,10 @@ TEST_CASE("Test filename", "[FileSystem]")
             {"C:\\foo\\..",      ".."},
             {".",            "."},
             {"..",           ".."},
-//            {"C:\\",            ""},
-//            {"C:\\host",        "host"},
-//            {"C:\\\\host",       "host"},
-//            {"C:\\\\\\host",      "host"}
+            {"C:\\",            ""},
+            {"C:\\host",        "host"},
+            {"C:\\\\host",       "host"},
+            {"C:\\\\\\host",      "host"}
     };
 
     string output;
@@ -45,34 +45,34 @@ TEST_CASE("Test filename", "[FileSystem]")
     }
 }
 
-///*!
-// * Testing parent_path()
-// */
-//TEST_CASE("Test parent_path", "[FileSystem]")
-//{
-//    const map<string, string> testCases = {
-//            {"C:\\foo\\bar.txt", "C:\\foo"},
-//            {"C:\\foo\\.bar",    "C:\\foo"},
-//            {"C:\\foo\\bar\\",    "C:\\foo"},
-//            {"C:\\foo\\.",       "C:\\foo"},
-//            {"C:\\foo\\..",      "C:\\foo"},
-//            {".",            ""},
-//            {"..",           ""},
-//            {"C:\\",            "C:\\"},
-//            {"C:\\host",        "C:\\"},
-//            {"C:\\\\host",       "C:\\"},
-//            {"C:\\\\\\host",      "C:\\"}
-//    };
-//
-//    string output;
-//    for (auto it = testCases.begin(); it != testCases.end(); it++)
-//    {
-//        output = filesystem::path(it->first).parent_path();
-//        CHECK(output == it->second);
-////        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
-////        std::cout << "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
-//    }
-//}
+/*!
+ * Testing parent_path()
+ */
+TEST_CASE("Test parent_path", "[FileSystem]")
+{
+    const map<string, string> testCases = {
+            {"C:\\foo\\bar.txt", "C:\\foo"},
+            {"C:\\foo\\.bar",    "C:\\foo"},
+            {"C:\\foo\\bar\\",    "C:\\foo"},
+            {"C:\\foo\\.",       "C:\\foo"},
+            {"C:\\foo\\..",      "C:\\foo"},
+            {".",            ""},
+            {"..",           ""},
+            {"C:\\",            "C:\\"},
+            {"C:\\host",        "C:\\"},
+            {"C:\\\\host",       "C:\\"},
+            {"C:\\\\\\host",      "C:\\"}
+    };
+
+    string output;
+    for (auto it = testCases.begin(); it != testCases.end(); it++)
+    {
+        output = filesystem::path(it->first).parent_path();
+        CHECK(output == it->second);
+//        CHECK_MESSAGE(output == it->second, "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'");
+//        std::cout << "dirname '" << it->first << "' -> '" << it->second << "' : '" << output << "'";
+    }
+}
 
 /*!
  * Testing is_absolute()
