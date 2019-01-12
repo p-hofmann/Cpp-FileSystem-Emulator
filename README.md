@@ -6,7 +6,7 @@ It is usable with g++11 without additional libraries
  * Early version: Not all methods are implemented since they are coded as they are needed.
  * Additional methods are available, such as force_absolute_path().
  * Compatible with Linux, Windows OS and Apple(Darwin).
- * Continuous integration: [Circle CI](https://circleci.com/), [Circle CI](https://circleci.com/).
+ * Continuous integration: [Travis CI](travis-ci.com/), [Circle CI](https://circleci.com/).
  
 ## Noteworthy methods
 All methods are compatible with Linux, Windows OS and Apple(Darwin).
