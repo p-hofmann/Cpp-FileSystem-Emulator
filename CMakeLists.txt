@@ -42,6 +42,10 @@ target_include_directories(Cpp_FileSystem_Emulator
     ${CMAKE_CURRENT_SOURCE_DIR}/src
     )
 
+
+#add external projects
+add_subdirectory(external)
+
 # Add Unittest
 enable_testing()
 add_subdirectory(tests)
