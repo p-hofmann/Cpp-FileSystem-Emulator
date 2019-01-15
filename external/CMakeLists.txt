@@ -14,7 +14,7 @@ if (NOT TARGET catch2_project)
     ExternalProject_Add(
         catch2_project
         PREFIX ${CMAKE_BINARY_DIR}/catch2
-        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../external/Catch2
+        SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Catch2
         GIT_REPOSITORY https://github.com/catchorg/Catch2.git
         GIT_TAG origin/master
         CONFIGURE_COMMAND ""
