@@ -14,7 +14,7 @@ All methods are compatible with Linux, Windows OS and Apple(Darwin).
 ### filesystem::path::force_absolute_path()
 This methods forces an absolute path from a given file or folder path.  
 Given a relative path, the current working directory is added, 
-except in case it is an executable found in the system path.
+except in case there is an executable found in the system path.
 In such a case the system path is added. 
 Using Windows OS, the extension '.exe' might be added 
 if an executable(.exe) file was found in the system path.
@@ -22,7 +22,7 @@ Note however, that an extension will not be looked for in any other case!
 If a local relative directory/file and a system path file fit a given relative path, 
 the local path is given priority.  
 A file or folder does not need to exist for a path to get transformed into a full path, it only effects priority.  
-Priority: Existing local path > System file > Local path   
+Priority: Existing local path > System path > Local path   
 
 ### filesystem::get_environment_variable(your_variable)
 Resolves a environment variable and returns it as string.
